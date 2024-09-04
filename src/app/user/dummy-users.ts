@@ -1,3 +1,5 @@
+import { User } from './user.model';
+
 export const DUMMY_USERS: User[] = [
   {
     id: 'u1',
