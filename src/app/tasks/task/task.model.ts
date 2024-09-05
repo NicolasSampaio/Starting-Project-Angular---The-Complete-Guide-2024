@@ -5,3 +5,5 @@ export interface Task {
   summary: string;
   dueDate: string;
 }
+
+export interface NewTask extends Omit<Task, 'id' | 'userId'> {}
