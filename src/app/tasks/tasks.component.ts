@@ -39,5 +39,7 @@ export class TasksComponent {
       userId: this.userId,
       id: Date.now().toString(),
     });
+
+    this.isAddingTask = false;
   }
 }
