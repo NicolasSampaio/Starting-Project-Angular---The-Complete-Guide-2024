@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
-import { dummyTasks } from './task/dummy-tasks';
 import { NewTaskComponent } from './new-task/new-task.component';
-import { NewTask } from './task/task.model';
+import { NewTask } from './task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -14,32 +14,19 @@ import { NewTask } from './task/task.model';
 export class TasksComponent {
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) name!: string;
-  tasks = dummyTasks;
-  isAddingTask = false;
+  isNewTaskModalOpen = false;
+
+  constructor(private tasksService: TasksService) {}
 
   get selectedUserTasks() {
-    return this.tasks.filter((task) => task.userId === this.userId);
-  }
-
-  onCompleteTask(taskId: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    return this.tasksService.getUserTasks(this.userId);
   }
 
   onAddTask() {
-    this.isAddingTask = true;
+    this.isNewTaskModalOpen = true;
   }
 
-  onCancelAddTask() {
-    this.isAddingTask = false;
-  }
-
-  onCreateTask(newTask: NewTask) {
-    this.tasks.unshift({
-      ...newTask,
-      userId: this.userId,
-      id: Date.now().toString(),
-    });
-
-    this.isAddingTask = false;
+  onCloseNewTask() {
+    this.isNewTaskModalOpen = false;
   }
 }
