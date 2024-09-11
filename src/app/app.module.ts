@@ -20,7 +20,6 @@ import { FormsModule } from '@angular/forms';
     TaskComponent,
     NewTaskComponent,
   ],
-  providers: [DatePipe],
   bootstrap: [AppComponent],
   imports: [BrowserModule, FormsModule],
 })
